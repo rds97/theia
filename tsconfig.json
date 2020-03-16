@@ -8,7 +8,8 @@
   "include": [
     "dev-packages/*/src",
     "packages/*/src",
-    "examples/*/src"
+    "examples/*/src",
+    "examples/browser/src-gen"
   ],
   "compilerOptions": {
     "baseUrl": ".",
