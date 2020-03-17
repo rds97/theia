@@ -364,6 +364,25 @@ declare module monaco.actions {
      */
     // https://github.com/theia-ide/vscode/blob/standalone/0.19.x/src/vs/platform/actions/common/actions.ts#L142
     export const MenuRegistry: IMenuRegistry;
+
+    // https://github.com/theia-ide/vscode/blob/standalone/0.19.x/src/vs/platform/actions/common/actions.ts#L112
+    export interface IMenuActionOptions {
+        arg?: any;
+        shouldForwardArgs?: boolean;
+    }
+
+    // https://github.com/theia-ide/vscode/blob/standalone/0.19.x/src/vs/platform/actions/common/actions.ts#L246
+    export class MenuItemAction {
+        readonly item: ICommandAction;
+        readonly alt: MenuItemAction | undefined;
+        constructor(
+            item: ICommandAction,
+            alt: ICommandAction | undefined,
+            options: IMenuActionOptions,
+            contextKeyService: monaco.contextKeyService.IContextKeyService,
+            commandService: monaco.commands.ICommandService
+        )
+    }
 }
 
 declare module monaco.platform {
