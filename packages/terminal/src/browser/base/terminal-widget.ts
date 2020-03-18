@@ -26,6 +26,8 @@ export abstract class TerminalWidget extends BaseWidget {
     abstract processId: Promise<number>;
 
     abstract terminalId: number;
+
+    abstract isInteractive: boolean;
     /**
      * Start terminal and return terminal id.
      * @param id - terminal id.

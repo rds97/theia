@@ -155,12 +155,13 @@ export class TaskTerminalWidgetManager {
                     continue;
                 }
                 // to run a task whose `taskPresentation === 'dedicated'`, the terminal to be reused must be
-                // 1) dedicated, 2) idle, and 3) the one that ran the same task
+                // 1) dedicated, 2) idle, 3) the one that ran the same task, and 4) is not an interactive terminal
                 if (isDedicated &&
                     isIdle &&
                     taskConfig &&
                     options.taskConfig &&
-                    this.taskDefinitionRegistry.compareTasks(options.taskConfig, taskConfig)) {
+                    this.taskDefinitionRegistry.compareTasks(options.taskConfig, taskConfig) &&
+                    !widget.isInteractive) {
 
                     reusableTerminalWidget = widget;
                     break;
@@ -174,8 +175,8 @@ export class TaskTerminalWidgetManager {
                     continue;
                 }
                 // to run a task whose `taskPresentation === 'shared'`, the terminal to be used must be
-                // 1) not dedicated, and 2) idle
-                if (!isDedicated && isIdle) {
+                // 1) not dedicated, 2) idle, and 3) is not an interactive terminal
+                if (!isDedicated && isIdle && !widget.isInteractive) {
                     availableWidgets.push(widget);
                 }
             }

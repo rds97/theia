@@ -47,6 +47,7 @@ export interface TerminalWidgetFactoryOptions extends Partial<TerminalWidgetOpti
 export class TerminalWidgetImpl extends TerminalWidget implements StatefulWidget {
 
     private readonly TERMINAL = 'Terminal';
+    isInteractive = true;
     terminalId = -1;
     protected readonly onTermDidClose = new Emitter<TerminalWidget>();
     protected readonly onTermDidDispose = new Emitter<void>();
@@ -324,6 +325,7 @@ export class TerminalWidgetImpl extends TerminalWidget implements StatefulWidget
     protected async attachTerminal(id: number): Promise<number> {
         const terminalId = await this.shellTerminalServer.attach(id);
         if (IBaseTerminalServer.validateId(terminalId)) {
+            this.isInteractive = this.restored;
             return terminalId;
         }
         this.logger.error(`Error attaching to terminal id ${id}, the terminal is most likely gone. Starting up a new terminal instead.`);
